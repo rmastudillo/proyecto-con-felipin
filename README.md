@@ -6,4 +6,5 @@
 - backend desde un template vacío 
 
 #2) instalando cosas backend:
-- yarn add express morgan dotenv cors cookie-parser nodemon sequelize sequelize-cli pg jsonwebtoken bcrypt
+- yarn add express morgan dotenv cors cookie-parser nodemon sequelize sequelize-cli pg pg-hstore jsonwebtoken bcrypt
+
