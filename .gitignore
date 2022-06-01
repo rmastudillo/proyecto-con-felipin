@@ -106,3 +106,4 @@ dist
 ./tellevo/node_modules*
 .node_modules*
 ./tellevo-backend/node_modules*
+./tellevo-backend/.env

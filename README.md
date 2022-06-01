@@ -10,3 +10,4 @@
 
 set up inicial back end completo
 yarn sequelize init
+nota: si sale un error es porque .sequelizerc está haciendo conflicto, borrar este archivo al correr el init y luego restaurarlo

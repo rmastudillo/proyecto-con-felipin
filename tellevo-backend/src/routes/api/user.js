@@ -5,7 +5,7 @@ const router = express.Router();
 const dotenv = require("dotenv");
 dotenv.config();
 
-const db = require('../../../models');
+const db = require('../../models');
 
 
 
