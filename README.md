@@ -8,3 +8,5 @@
 #2) instalando cosas backend:
 - yarn add express morgan dotenv cors cookie-parser nodemon sequelize sequelize-cli pg pg-hstore jsonwebtoken bcrypt
 
+set up inicial back end completo
+yarn sequelize init
