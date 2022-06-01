@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+./tellevo/node_modules*
+.node_modules*
+./tellevo-backend/node_modules*
