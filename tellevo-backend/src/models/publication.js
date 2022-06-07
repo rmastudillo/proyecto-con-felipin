@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.user, {
         foreignKey: 'idUser',
         as: 'user'
-      })
+      });
     }
   }
   publication.init({
