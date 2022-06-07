@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   publication.init({
+    idUser: DataTypes.INTEGER,
     start: DataTypes.STRING,
     end: DataTypes.STRING,
     date: DataTypes.DATE,
