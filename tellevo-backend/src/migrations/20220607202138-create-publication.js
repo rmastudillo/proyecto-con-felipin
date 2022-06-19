@@ -10,6 +10,35 @@ module.exports = {
       },
       idUser: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+      },
+      idUser_1: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+      },
+      idUser_2: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+      },
+      idUser_3: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+      },
+      idUser_4: {
+        type: Sequelize.INTEGER,
         references: {
           model: 'users',
           key: 'id'

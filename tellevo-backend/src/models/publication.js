@@ -13,8 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.user, {
         foreignKey: 'idUser',
-        as: 'user'
+        as: 'driver'
       });
+            this.hasMany(models.user, {
+              foreignKey: 'idUser_1', as: 'passenger_id_1',
+              foreignKey: 'idUser_2', as: 'passenger_id_2',
+              foreignKey: 'idUser_3', as: 'passenger_id_3',
+              foreignKey: 'idUser_4', as: 'passenger_id_4'
+            }); 
     }
   }
   publication.init({
@@ -23,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     end: DataTypes.STRING,
     date: DataTypes.DATE,
     available_seats: DataTypes.INTEGER,
-    price: DataTypes.BIGINT
+    price: DataTypes.BIGINT,
+    idUser_1: DataTypes.INTEGER,
+    idUser_2: DataTypes.INTEGER,
+    idUser_3: DataTypes.INTEGER,
+    idUser_4: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'publication',
