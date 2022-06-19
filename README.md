@@ -46,3 +46,4 @@ Luego de crear los modelos, es recomendable crear las repectivas asociaciones, e
 - Borrar BDD: `yarn sequelize db:drop`
 - Migrar modelos: `yarn sequelize db:migrate`
 - Poblar BDD con seeds: `yarn sequelize db:seed:all`
+`yarn sequelize db:drop ; yarn sequelize db:create;yarn sequelize db:migrate ;yarn sequelize db:seed:all`
