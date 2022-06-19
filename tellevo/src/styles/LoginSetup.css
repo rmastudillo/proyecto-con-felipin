@@ -1,0 +1,123 @@
+.background-login {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1564115484-a4aaa88d5449?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #cccccc;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+
+.login-card-form {
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 10%;
+  padding-top: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
+  background-color: white;
+  width: 420px;
+  height: 20%;
+}
+
+.form-box {
+  /*  border: 2px solid blue; */
+  border-radius: 2%;
+  padding-left: 2%;
+  padding-top: 5%;
+
+}
+
+.input-box {
+  /*  border: 2px solid red; */
+  border-radius: 4px;
+  width: 90%;
+  height: 40px;
+  margin-bottom: 5%;
+  border-style: hidden;
+  background-color: rgba(51, 52, 53, 0.048);
+  font-family: 'Roboto', sans-serif;
+  padding-left: 2%;
+}
+
+.input-box:focus {
+  border-style: hidden;
+}
+
+#submit-button {
+  color: rgba(0, 0, 0, 0.719);
+  background-color: rgba(35, 35, 36, 0.13);
+  border-style: dashed;
+  margin-top: 5%;
+  height: 60px;
+  font-size: large;
+  border-color: rgba(102, 51, 153, 0.514);
+  font-weight: 600;
+
+}
+
+#submit-button:hover {
+
+  border-style: double;
+  box-shadow: 2px 2px 0 0 #666;
+}
+
+#submit-button:active {
+  transform: translateY(2%);
+}
+
+.welcome-message {
+  color: #666;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error-message {
+  color: red;
+  font-size: small;
+  font-weight: 600;
+  text-align: left;
+  justify-content: center;
+}
+
+.driver-form {
+  padding: 10%;
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  font-weight: 600;
+}
+
+
+.locations {
+  font-size: large;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  border-radius: 4px;
+  border-style: double;
+  padding-left: 5%;
+}
+
+#back-button {
+  color: rgba(0, 0, 0, 0.719);
+  background-color: rgba(35, 35, 36, 0.13);
+  border-style: dashed;
+  margin-top: 5%;
+
+  font-size: large;
+  border-color: rgba(102, 51, 153, 0.514);
+  font-weight: 600;
+  text-align: center;
+  height: 40px;
+}
+#back-button:hover {
+
+  border-style: double;
+  box-shadow: 2px 2px 0 0 #666;
+}

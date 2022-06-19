@@ -1,0 +1,31 @@
+.background-trips {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url("https://img.freepik.com/vector-gratis/mapa-ciudad-color-marcadores-pin-rojo_23-2148313099.jpg?w=2000");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+.trips-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.triplink {
+  text-decoration: none;
+
+}
+
+.triplink:visited {
+  text-decoration: none;
+  color: black;
+}
+
+#trips {
+  width: 800px;
+  text-align: center;
+}
