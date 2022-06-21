@@ -114,8 +114,7 @@ router.post("/sign-up/", async (req, res) => {
       console.log(existingUser);
 
       if (existingUser) {
-        console.log("hola");
-        res.status(400).json({ error: "Username en uso" });
+        res.status(200).json({ error: error.message });
       } else {
         /*         console.log("hola");
                 const hashedPassword = await bcrypt.hash(
@@ -133,7 +132,7 @@ router.post("/sign-up/", async (req, res) => {
       res.status(400).json({ error: "Contraseñas no coinciden" });
     }
   } catch (e) {
-    res.status(400).json({ e: e.message });
+    res.status(200).json({ e: e.message });
   }
 });
 
