@@ -53,52 +53,21 @@ router.get("/:id", async (req, res) => {
 })
 
 /* Sacado de la actividad */
+
 router.post("/login/", async (req, res) => {
-  /* 
-    const authenticateUser = (user) => {
-      // verifica si el usuario existe y lo retorna, sino retorna null
-      // falla la autenticación pero no es tan importante sin bdd
-      // const query = `SELECT * FROM users 
-      //             WHERE email = ${user.email} AND password=${user.password};`;
-      console.log("USER email: " + user.email);
-      console.log("USER password: " + user.password);
-      const found = User.filter((u) => {
-        u.email == user.email && u.password == user.password
-      });
-      console.log("FOUND: " + found);
-      return found.length > 0 ? found[0] : null;
-    };
-   */
   const userFound = await user.findOne({
     where: { email: req.body.email, password: req.body.password },
   });
   // quizás al loggear deba guardar al user logeado?
-  const user = userFound;/* authenticateUser(userFound);
- */
-
-
-
-
-  if (!user) {
+  if (!userFound) {
     res.status(400).json({ error: "El usuario y la contraseña no coinciden" });
   } else {
-    /* const result = bcrypt.compareSync(req.body.password, user.password); */
     const result = true;
     if (result) {
-      /*       const token = jwt.sign(
-              {
-                username: user.username,
-              },
-              process.env.SECRET_KEY,
-              {
-                expiresIn: "1800s",
-              }
-            ); */
-      res.status(200).json(user);
+      res.status(200).json(userFound);
     } else {
       res
-        .status(400)
-        .json({ error: "El usuario y la contraseña no coinciden" });
+        .json({ error: error.message });
     }
   }
 });
@@ -116,16 +85,7 @@ router.post("/sign-up/", async (req, res) => {
       if (existingUser) {
         res.status(200).json({ error: error.message });
       } else {
-        /*         console.log("hola");
-                const hashedPassword = await bcrypt.hash(
-                  req.body.password,
-                  SALT_ROUNDS
-                );
-                console.log("hola");  */
-        /* Aca se crea el usuario */
-
         const newuser = await user.create(req.body);
-
         res.status(201).json(newuser);
       }
     } else {
@@ -135,6 +95,8 @@ router.post("/sign-up/", async (req, res) => {
     res.status(200).json({ e: e.message });
   }
 });
+
+
 
 router.patch('/edit/:id', async (ctx, res) => {
 

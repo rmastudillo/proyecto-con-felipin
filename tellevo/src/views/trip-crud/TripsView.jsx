@@ -13,7 +13,6 @@ export default function TripsView() {
   const { user_id } = useParams();
 
 
-
   if (loading) {
     return <h2>Loading...</h2>;
   }

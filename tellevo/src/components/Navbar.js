@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { userContext } from '../providers/UserProvider';
 
-const Navbar = ({ user_logged }) => {
+const Navbar = () => {
   // const [userLogged, setUserLogged] = useState(user_logged);
-  const userLogged = false;
+  const userLogged = useContext(userContext);
   // const userLogged = 0;
   return (
     <>
@@ -17,7 +18,7 @@ const Navbar = ({ user_logged }) => {
             Pagina Principal
           </NavLink>
 
-          {userLogged ?
+          {userLogged &&
             <div>
               <div>
                 <NavLink to='/createtrip' activestyle="true">
@@ -29,11 +30,13 @@ const Navbar = ({ user_logged }) => {
                   Viajes
                 </NavLink>
               </div>
-            </div> : null}
+            </div>}
 
         </NavHome>
         <NavSignin>
-          {userLogged ? <NavSigninLink to={`/user/${userLogged.id}`}>Profile</NavSigninLink> :
+          {userLogged 
+          ? <NavSigninLink to={'/profile'}>Perfil</NavSigninLink>
+          :
             <div>
               <NavSigninLink to='/login'>Iniciar Sesión</NavSigninLink>
               <NavSigninLink to='/register'>Register</NavSigninLink>

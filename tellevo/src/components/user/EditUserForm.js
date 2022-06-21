@@ -1,69 +1,76 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState, useContext} from 'react';
 import { Form } from './styled/EditUserForm.styled';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { userContext, toggleUserContext } from '../../providers/UserProvider';
 
 const EditUserForm = () => {
-  const { id } = useParams();
-  const [userData, setUserData] = useState({});
-  const [formData, setFormData] = useState({});
-  // const myUser = {
-  //   id: 7,
-  //   name: "benja",
-  //   username: "benjen",
-  //   email: "benja@uc.cl",
-  //   password: "12345678",
-  //   driver: true
-  // }
-  // setUserData(myUser);
+  const user = useContext(userContext);
+  const userLogin = useContext(toggleUserContext);
+  const navigate = useNavigate();
+  const [driverText, setDriverText] = user.driver ? useState("Ya no quiero conducir") : useState("Quiero conducir");
 
-  useEffect(() => {
-    axios.get(`/user/${id}`).then((response) => {
-      setUserData(response.data)
-    })
-  }, [])
-
-  // const handleInputChange = (event) => {
-  //   console.log(event.target.value);
-  //   setFormData({
-  //     ...formData,
-  //     [event.target.name]: event.target.value
-  //   })
-  // }
+  // useEffect(() => {
+  //   user = useContext(userContext);
+  // }, user)
 
   const sendData = (event) => {
     console.log(event);
     event.preventDefault();
     console.log("EVENT: " + event);
-    // setFormData({
-    //   [event.target.name]: event.target.value,
-    //   [event.target.username]: event.target.value
-    // })
-    // console.log(formData);
-    // axios.patch(`/user/edit/${userData.id}`, {
-    //   id: userData.id, 
-    //   name: formData.name,
-    //   username: formData.username,
-    //   email: formData.email,
-    //   driver: formData.driver
-    // })
+    const formData = {
+      [event.target.name]: event.target.value,
+      [event.target.email]: event.target.value,
+    };
+    console.log(formData);
+    axios.patch(`edit/${user.id}`, {
+      name: formData.name,
+      email: formData.email,
+    }).then((response) => {
+      if (response.data.updated)
+      {
+        userLogin(user.id);
+        navigate('/profile');
+      }
+    })
+  }
+
+  const cancelEdit = () => {
+    navigate('/profile');
+  }
+
+  const setDriver = () => {
+    axios.patch(`edit/${user.id}`, {
+      driver: !user.driver
+    }).then((response) => {
+      if (response.data.updated)
+      {
+        userLogin(user.id);
+        user = useContext(userContext);
+        user.driver ? setDriverText("Ya no quiero conducir") : setDriverText("Quiero conducir");
+        console.log(user);
+        navigate('/profile');
+      }
+    })
   }
 
   return (
     <Fragment>
-      <h1>Edit {userData.username} form:</h1>
+      <h1>Edit {user.username}'s profile:</h1>
       <Form onSubmit={sendData}> 
         <div>
+          <label>Nombre:</label><br></br>
           <input 
-          value={userData.name} 
+          defaultValue={user.name} 
           type="text"
           name="name"
           // onChange={handleInputChange}
           />
         </div>
         <div>
+          <label>Email:</label><br></br>
           <input 
-          value={userData.email} 
+          defaultValue={user.email} 
           type="text"
           name="email"
           // onChange={handleInputChange}
@@ -71,29 +78,15 @@ const EditUserForm = () => {
           />
         </div>
         <div>
-          <input 
-          placeholder="password" 
-          type="password"
-          name="password"
-          // onChange={handleInputChange}
-          required
-          />
-        </div>
-        <div>
-          <input 
-          value="driver"
-          type="checkbox"
-          name="driver" 
-          checked
-          />
-        </div>
-        <div>
           <button type="submit">Confirmar</button>
         </div>
         <div>
-          <button>Cancelar</button>
+          <button onClick={cancelEdit}>Cancelar</button>
         </div>
       </Form>
+      <div>
+        <button onClick={setDriver}>{driverText}</button>
+      </div>
       
     </Fragment>
   )

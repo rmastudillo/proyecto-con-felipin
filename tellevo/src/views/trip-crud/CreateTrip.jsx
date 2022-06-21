@@ -40,6 +40,7 @@ const locations = [
 
 export default function CreateTrip() {
   const navigate = useNavigate()
+
   const [outputPoint, setOutputPoint] = useState('')
   const [comOutput, setComOutput] = useState('')
 
@@ -68,7 +69,7 @@ export default function CreateTrip() {
       userName,
     }
 
-    const url = '/';
+    const url = '/create/trip';
 
     axios.post(url, body).then((response) => {
 

@@ -1,59 +1,55 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams, useNavigate, renderMatches } from 'react-router-dom';
-import { DeleteButton, EditButton } from './styled/Profile.styled';
+import { DeleteButton, EditButton, SessionButton, BackgroundProfile, UserInfo,
+Username, Name, Email, Driver, ActionButtons } from './styled/Profile.styled';
+import { userContext, toggleUserContext } from '../../providers/UserProvider';
 // import EditUserForm from './EditUserForm';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [user, setUser] = useState({});
-
-
-  useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    fetch(`${id}`, requestOptions)
-      .then((response) => {
-        if (response.status === 404) {
-          return navigate(`/`);;
-        }
-        return response.json();
-      })
-      .then((data) => { setUser(data) });
-  }, []);
-
-
+  const user = useContext(userContext);
+  const userLogin = useContext(toggleUserContext);
 
   const deleteUser = async () => {
-    axios.delete(`/user/${id}`).then((response) => {
-      console.log("RESPONSE: " + response.data.error)
+    axios.delete(`/user/${user.id}`).then((response) => {
+      console.log("RESPONSE: " + response.data.error);
+      if(response.ok)
+      {
+        userLogin(null);
+      }
     })
   }
 
   const editUser = () => {
-    navigate(`/user/edit/${id}`);
+    navigate('/user/edit');
   }
+
+  const endSession = () => {
+    userLogin(null);
+    navigate('/');
+  }
+
   return (
-    <>
+    <BackgroundProfile>
 
-    <div>
-      <h3>{user.name}</h3>
-      <p>{user.email}</p>
-      {user.driver ? <p>Registered as driver</p> : 
-      <p>Not registered as driver</p>}
-    </div>
-    <EditButton onClick={editUser}>Edit profile</EditButton>
-    <div>
-      <DeleteButton onClick={deleteUser}>Delete Account</DeleteButton>
-    </div>
+      <UserInfo>
+        <Username>{user.username}</Username>
+        <Name>{user.name}</Name>
+        <Email>{user.email}</Email>
+        {user.driver ? <Driver>Registered as driver</Driver> : 
+        <Driver>Not registered as driver</Driver>}
+      </UserInfo>
+      <ActionButtons>
+        <EditButton onClick={editUser}>Editar Perfil</EditButton>
+        <SessionButton onClick={endSession}>Cerrar Sesión</SessionButton>
+      </ActionButtons>
+      <div>
+        <DeleteButton onClick={deleteUser}>Eliminar Cuenta</DeleteButton>
+      </div>
 
-    </>
+    </BackgroundProfile>
   )
 }
 

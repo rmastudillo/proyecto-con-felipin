@@ -13,23 +13,23 @@ export default function LandingPage() {
 
 
 
-/* 
-  useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    fetch(`${process.env.REACT_APP_URL}/hello`, requestOptions)
-      .then((response) => {
-        if (response.status === 404) {
-          return [];
-        }
-        return response.json();
-      })
-      .then((data) => { setHello(data) });
-  }, []); */
+  /* 
+    useEffect(() => {
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${process.env.REACT_APP_URL}/hello`, requestOptions)
+        .then((response) => {
+          if (response.status === 404) {
+            return [];
+          }
+          return response.json();
+        })
+        .then((data) => { setHello(data) });
+    }, []); */
 
   return (
     < div className="background-landingpage" >

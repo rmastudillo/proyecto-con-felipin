@@ -30,10 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     available_seats: DataTypes.INTEGER,
     price: DataTypes.BIGINT,
-    passenger_id_1: DataTypes.INTEGER,
-    passenger_id_2: DataTypes.INTEGER,
-    passenger_id_3: DataTypes.INTEGER,
-    passenger_id_4: DataTypes.INTEGER
+    idUser_1: DataTypes.INTEGER,
+    idUser_2: DataTypes.INTEGER,
+    idUser_3: DataTypes.INTEGER,
+    idUser_4: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'publication',

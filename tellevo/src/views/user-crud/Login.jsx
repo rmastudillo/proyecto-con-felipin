@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm/* , SubmitHandler */ } from 'react-hook-form'
 import "../../styles/LoginSetup.css"
 import axios from 'axios';
+import { userContext, toggleUserContext } from '../../providers/UserProvider';
 
 export default function Login() {
-  const [loginStatus, setLoginStatus] = useState("");
-  const [userLogged, setUserLogged] = useState({});
+  // const [loginStatus, setLoginStatus] = useState("");
+  // const [userLogged, setUserLogged] = useState({});
+  const userLogged = useContext(userContext);
+  const userLogin = useContext(toggleUserContext);
   const navigate = useNavigate();
 
   /* register es para registrar los diferentes campos del formulario */
@@ -15,8 +18,12 @@ export default function Login() {
   /* Aquí gestiono que hago con los datos del formulario */
   const onSubmit = (data) => {
     console.log(data);
-    if (userValid()) goHomePage();
-    alert(loginStatus);
+    if (userValid()) {
+      goHomePage();
+    }
+    else {
+      alert("Credenciales de usuario incorrectas");
+    }
   }
 
   const userValid = async () => {
@@ -24,19 +31,18 @@ export default function Login() {
       email: watch('email'),
       password: watch('password')
     };
-    const url = '/user/login';
-    validateUserData(url, userData);
-    return userLogged.length > 0;
+    const path = '/user/login';
+    return validateUserData(path, userData);
   };
 
-  const validateUserData = (url, userData) => {
-    axios.post(url, userData).then((response) => {
-
+  const validateUserData = (path, userData) => {
+    axios.post(path, userData).then((response) => {
       if (response.status === 200) {
         console.log("Status: " + response.data);
-        setUserLogged(response.data);
+        userLogin(response.data.id);
+        return true;
       } else {
-        setUserLogged({});
+        return false;
       }
     });
   }
@@ -53,14 +59,6 @@ export default function Login() {
     */
   }
 
-  // const getUserData = async(url) => {
-  //   fetch(url).then(res => {
-  //     if (res.ok)
-  //       return res.json();
-  //   }
-  //   ).then(jsonResponse => setUserValidation(jsonResponse));
-  // }
-  /*  */
   return (
     <div className="background-login">
       <div className="login-card-form">

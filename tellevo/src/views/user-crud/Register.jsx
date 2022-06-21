@@ -26,7 +26,7 @@ export default function Register() {
       const ruta = 'http://localhost:9000/user/sign-up/';
       const response = await fetch(ruta, requestOptions);
       console.log(response);
-      if (response.status !== 200) {
+      if (response.status !== 200 && response.status !== 201) {
         const error = await response.text();
         throw new Error(error);
       }
@@ -84,24 +84,6 @@ export default function Register() {
     "Quinta Normal"
   ];
 
-  // const userExists = (mail) => {
-  //   return users.find((user) => user.mail === mail) ? true : false;
-  // };
-
-  /* const addUser = () => {
-    const ids = users.map((user) => user.id);
-    const maxID = Math.max(...ids);
-    const newUser = {
-      id: maxID + 1,
-      name: watch('name'),
-      mail: watch('email'),
-      password: watch('password'),
-      is_driver: watch('conductor')
-    };
-    setUsers([...users, newUser]);
-    alert("Usuario creado correctamente")
-  } */
-  /*  */
   return (
     <div className="background-login">
       <div className="login-card-form">
@@ -116,8 +98,16 @@ export default function Register() {
               required: true,
               maxLength: 12
             })}
+              placeholder="Nombre de usuario" />
+          </div>
+          <div>
+            {/* ... register me deja registrar las casillas del formulario */}
+            <input className='input-box' {...register(
+              'name', {
+              required: true,
+              maxLength: 18
+            })}
               placeholder="Nombre" />
-
           </div>
           <div >
             <input className='input-box' {...register(
