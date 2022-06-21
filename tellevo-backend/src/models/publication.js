@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'idUser',
         as: 'driver'
       });
-            this.hasMany(models.user, {
-              foreignKey: 'idUser_1', as: 'passenger_id_1',
-              foreignKey: 'idUser_2', as: 'passenger_id_2',
-              foreignKey: 'idUser_3', as: 'passenger_id_3',
-              foreignKey: 'idUser_4', as: 'passenger_id_4'
-            }); 
+      this.hasMany(models.user, {
+        foreignKey: 'id', as: 'passenger_id_1',
+        foreignKey: 'id', as: 'passenger_id_2',
+        foreignKey: 'id', as: 'passenger_id_3',
+        foreignKey: 'id', as: 'passenger_id_4'
+      });
     }
   }
   publication.init({
@@ -29,11 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     end: DataTypes.STRING,
     date: DataTypes.DATE,
     available_seats: DataTypes.INTEGER,
-    price: DataTypes.BIGINT,
-    idUser_1: DataTypes.INTEGER,
-    idUser_2: DataTypes.INTEGER,
-    idUser_3: DataTypes.INTEGER,
-    idUser_4: DataTypes.INTEGER,
+    price: DataTypes.BIGINT
   }, {
     sequelize,
     modelName: 'publication',

@@ -105,10 +105,14 @@ router.post("/login/", async (req, res) => {
 
 router.post("/sign-up/", async (req, res) => {
   try {
+
     if (req.body.password === req.body.passwordConfirmation) {
-      const existingUser = await User.findOne({
+      console.log(req.body.username);
+      const existingUser = await user.findOne({
         where: { username: req.body.username },
       });
+      console.log(existingUser);
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
       if (existingUser) {
         console.log("hola");
         res.status(400).json({ error: "Username en uso" });

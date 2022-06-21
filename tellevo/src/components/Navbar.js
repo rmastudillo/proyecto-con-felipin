@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Navbar = ({ user_logged }) => {
   // const [userLogged, setUserLogged] = useState(user_logged);
-  const userLogged = { id: 1 };
+  const userLogged = false;
   // const userLogged = 0;
   return (
     <>

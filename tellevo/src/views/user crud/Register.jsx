@@ -23,7 +23,7 @@ export default function Register() {
     };
     console.log(event);
     try {
-      const ruta = '/user/sign-up/';
+      const ruta = 'http://localhost:9000/user/sign-up/';
       const response = await fetch(ruta, requestOptions);
       console.log(response);
       if (response.status !== 200) {
