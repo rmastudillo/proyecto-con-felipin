@@ -6,8 +6,8 @@ import {
 /* Rutas */
 import Login from './views/user crud/Login';
 import LandingPage from './views/LandingPage'
-import Register from './views/user crud/Register';
-import TripsView from './views/trip crud/TripsView';
+import Register from './views/user-crud/Register';
+import TripsView from './views/trip-crud/TripsView';
 import Trip from './components/Trip';
 import Profile from './components/user/Profile';
 import CreateTrip from './views/trip crud/CreateTrip';

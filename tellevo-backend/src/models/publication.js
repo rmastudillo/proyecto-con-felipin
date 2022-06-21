@@ -29,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     end: DataTypes.STRING,
     date: DataTypes.DATE,
     available_seats: DataTypes.INTEGER,
-    price: DataTypes.BIGINT
+    price: DataTypes.BIGINT,
+    passenger_id_1: DataTypes.INTEGER,
+    passenger_id_2: DataTypes.INTEGER,
+    passenger_id_3: DataTypes.INTEGER,
+    passenger_id_4: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'publication',
