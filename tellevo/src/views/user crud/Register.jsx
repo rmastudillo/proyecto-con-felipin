@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm/* , SubmitHandler */ } from 'react-hook-form'
-import "../styles/LoginSetup.css"
+import "../../styles/LoginSetup.css"
 
 
 export default function Register() {

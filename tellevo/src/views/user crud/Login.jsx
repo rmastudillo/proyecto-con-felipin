@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm/* , SubmitHandler */ } from 'react-hook-form'
-import "../styles/LoginSetup.css"
+import "../../styles/LoginSetup.css"
 import axios from 'axios';
 
 export default function Login() {
