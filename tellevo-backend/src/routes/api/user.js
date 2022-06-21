@@ -112,7 +112,7 @@ router.post("/sign-up/", async (req, res) => {
         where: { username: req.body.username },
       });
       console.log(existingUser);
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
+
       if (existingUser) {
         console.log("hola");
         res.status(400).json({ error: "Username en uso" });
@@ -124,20 +124,16 @@ router.post("/sign-up/", async (req, res) => {
                 );
                 console.log("hola");  */
         /* Aca se crea el usuario */
-        const user = await user.create({
-          username: req.body.username,
-          password: req.body.password,
-          name: req.body.name,
-          driver: req.body.driver,
-          email: req.body.email,
-        });
-        res.status(201).json(user);
+
+        const newuser = await user.create(req.body);
+
+        res.status(201).json(newuser);
       }
     } else {
       res.status(400).json({ error: "Contraseñas no coinciden" });
     }
   } catch (e) {
-    res.status(400).json({ error: e });
+    res.status(400).json({ e: e.message });
   }
 });
 
