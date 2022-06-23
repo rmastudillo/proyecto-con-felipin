@@ -11,7 +11,6 @@ export default function Register() {
   /* register es para registrar los diferentes campos del formulario */
   /* handleSubmit me permite gestionar los submit del formulario */
   const { register, formState: { errors }, watch, handleSubmit } = useForm();
-  // const [users, setUsers] = useState(USERS);
   /* Aquí gestiono que hago con los datos del formulario */
   const onSubmit = async function handleSubmit(event) {
     console.log(event);
@@ -21,17 +20,14 @@ export default function Register() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(event),
     };
-    console.log(event);
     try {
-      const ruta = 'http://localhost:9000/user/sign-up/';
-      const response = await fetch(ruta, requestOptions);
+      const response = await fetch(`${process.env.REACT_APP_URL}/user/sign-up`, requestOptions);
       console.log(response);
       if (response.status !== 200 && response.status !== 201) {
         const error = await response.text();
         throw new Error(error);
       }
       if (response.status === 201) {
-        console.log('El usuario se creó correctamente');
         navigate('/');
         /* Con esta creo que podría hacerse que al logear vuelva
         a la página en la que estaba antes de apretar login

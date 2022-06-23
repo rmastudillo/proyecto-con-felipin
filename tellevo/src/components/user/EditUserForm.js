@@ -2,13 +2,15 @@ import React, {Fragment, useEffect, useState, useContext} from 'react';
 import { Form } from './styled/EditUserForm.styled';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { userContext, toggleUserContext } from '../../providers/UserProvider';
+// import { userContext, toggleUserContext } from '../../providers/UserProvider';
+import useAuth from '../../hooks/useAuth';
 
 const EditUserForm = () => {
-  const user = useContext(userContext);
-  const userLogin = useContext(toggleUserContext);
+  const { currentUser, handleUserLogin } = useAuth();
+  // const user = useContext(userContext);
+  // const userLogin = useContext(toggleUserContext);
   const navigate = useNavigate();
-  const [driverText, setDriverText] = user.driver ? useState("Ya no quiero conducir") : useState("Quiero conducir");
+  const [driverText, setDriverText] = currentUser.driver ? useState("Ya no quiero conducir") : useState("Quiero conducir");
 
   // useEffect(() => {
   //   user = useContext(userContext);
@@ -23,45 +25,46 @@ const EditUserForm = () => {
       [event.target.email]: event.target.value,
     };
     console.log(formData);
-    axios.patch(`edit/${user.id}`, {
+    axios.patch(`edit/${currentUser.id}`, {
       name: formData.name,
       email: formData.email,
     }).then((response) => {
       if (response.data.updated)
       {
-        userLogin(user.id);
-        navigate('/profile');
+        // userLogin(currentUser.id);
+        handleUserLogin(currentUser);
+        return navigate('/profile');
       }
     })
   }
 
   const cancelEdit = () => {
-    navigate('/profile');
+    return navigate('/profile');
   }
 
   const setDriver = () => {
-    axios.patch(`edit/${user.id}`, {
-      driver: !user.driver
+    axios.patch(`edit/${currentUser.id}`, {
+      driver: !currentUser.driver
     }).then((response) => {
       if (response.data.updated)
       {
-        userLogin(user.id);
-        user = useContext(userContext);
-        user.driver ? setDriverText("Ya no quiero conducir") : setDriverText("Quiero conducir");
-        console.log(user);
-        navigate('/profile');
+        handleUserLogin(currentUser);
+        // user = useContext(userContext);
+        currentUser.driver ? setDriverText("Ya no quiero conducir") : setDriverText("Quiero conducir");
+        // console.log(user);
+        return navigate('/profile');
       }
     })
   }
 
   return (
     <Fragment>
-      <h1>Edit {user.username}'s profile:</h1>
+      <h1>Edit {currentUser.username}'s profile:</h1>
       <Form onSubmit={sendData}> 
         <div>
           <label>Nombre:</label><br></br>
           <input 
-          defaultValue={user.name} 
+          defaultValue={currentUser.name} 
           type="text"
           name="name"
           // onChange={handleInputChange}
@@ -70,7 +73,7 @@ const EditUserForm = () => {
         <div>
           <label>Email:</label><br></br>
           <input 
-          defaultValue={user.email} 
+          defaultValue={currentUser.email} 
           type="text"
           name="email"
           // onChange={handleInputChange}

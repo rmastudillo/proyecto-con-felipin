@@ -12,6 +12,7 @@ import Trip from './components/Trip';
 import Profile from './components/user/Profile';
 import CreateTrip from './views/trip-crud/CreateTrip';
 import EditUserForm from './components/user/EditUserForm';
+import Chat from './views/Chat';
 
 /*      */
 
@@ -30,6 +31,7 @@ function Rutas() {
       <Route path="/trips" element={<TripsView />} />
 
       <Route exact path="/createtrip" element={<CreateTrip />} />
+      <Route exact path="/chat" element={<Chat />} />
 
     </Routes>
   );

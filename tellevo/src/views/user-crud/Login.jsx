@@ -1,15 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm/* , SubmitHandler */ } from 'react-hook-form'
-import "../../styles/LoginSetup.css"
+import "../../styles/LoginSetup.css";
+import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
-import { userContext, toggleUserContext } from '../../providers/UserProvider';
+// import { userContext, toggleUserContext } from '../../providers/UserProvider';
 
 export default function Login() {
+  const { currentUser, handleUserLogin } = useAuth();
+  // const { currentUser, handleUserLogin } = useAuth();
   // const [loginStatus, setLoginStatus] = useState("");
   // const [userLogged, setUserLogged] = useState({});
-  const userLogged = useContext(userContext);
-  const userLogin = useContext(toggleUserContext);
+  // const userLogged = useContext(userContext);
+  // const userLogin = useContext(toggleUserContext);
   const navigate = useNavigate();
 
   /* register es para registrar los diferentes campos del formulario */
@@ -17,7 +20,6 @@ export default function Login() {
   const { register, formState: { errors }, watch, handleSubmit } = useForm();
   /* Aquí gestiono que hago con los datos del formulario */
   const onSubmit = (data) => {
-    console.log(data);
     if (userValid()) {
       goHomePage();
     }
@@ -38,8 +40,7 @@ export default function Login() {
   const validateUserData = (path, userData) => {
     axios.post(path, userData).then((response) => {
       if (response.status === 200) {
-        console.log("Status: " + response.data);
-        userLogin(response.data.id);
+        handleUserLogin(response.data);
         return true;
       } else {
         return false;

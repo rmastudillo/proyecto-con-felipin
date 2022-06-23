@@ -3,22 +3,23 @@ import { FaBars } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { userContext } from '../providers/UserProvider';
+import useAuth from '../hooks/useAuth';
+// import { userContext } from '../providers/UserProvider';
 
 const Navbar = () => {
+  const { currentUser, handleUserLogout } = useAuth();
   // const [userLogged, setUserLogged] = useState(user_logged);
-  const userLogged = useContext(userContext);
+  // const userLogged = useContext(userContext);
   // const userLogged = 0;
   return (
     <>
       <Nav>
-
         <NavHome>
           <NavLink to='/' activestyle="true">
             Pagina Principal
           </NavLink>
 
-          {userLogged &&
+          {currentUser &&
             <div>
               <div>
                 <NavLink to='/createtrip' activestyle="true">
@@ -34,13 +35,18 @@ const Navbar = () => {
 
         </NavHome>
         <NavSignin>
-          {userLogged 
-          ? <NavSigninLink to={'/profile'}>Perfil</NavSigninLink>
+          {currentUser 
+          ? (
+            <>
+              <NavSigninLink to={'/profile'}>Perfil</NavSigninLink>
+              <button type="button" onClick={handleUserLogout}>Salir</button>
+            </>
+          )
           :
-            <div>
+            (<div>
               <NavSigninLink to='/login'>Iniciar Sesión</NavSigninLink>
               <NavSigninLink to='/register'>Register</NavSigninLink>
-            </div>}
+            </div>)}
         </NavSignin>
       </Nav>
     </>
