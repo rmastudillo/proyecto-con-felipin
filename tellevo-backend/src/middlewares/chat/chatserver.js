@@ -31,6 +31,8 @@ class Connection {
   }
 
   handleMessage(value) {
+    console.log("SOCKET BACK", this.socket);
+    console.log("users.get(this.socket)", this.socket.handshake.query.currentUser.email);
     const message = {
       id: uuidv4(),
       user: users.get(this.socket) || defaultUser,
