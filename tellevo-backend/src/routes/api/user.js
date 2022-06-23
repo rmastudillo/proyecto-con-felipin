@@ -1,15 +1,25 @@
+require("dotenv").config();
 const express = require('express');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const dotenv = require("dotenv");
-dotenv.config();
 
 const db = require('../../models');
 
 
 const { user } = db;
 
+// función que genera el token
+function generateToken(user) {
+  return new Promise((resolve, reject) => {
+    jwt.sign(
+      { sub: user.id },
+      process.env.JWT_SECRET,
+      { expiresIn: 60 * 60 },
+      (err, tokenResult) => (err ? reject(err) : resolve(tokenResult)),
+    );
+  });
+}
 
 /* req y res siempre se recibe */
 /* req contiene toda la info que viene desde el request */
@@ -64,7 +74,21 @@ router.post("/login/", async (req, res) => {
   } else {
     const result = true;
     if (result) {
-      res.status(200).json(userFound);
+      const token = await generateToken(userFound);
+      const PreUser = {
+        username: userFound.username,
+        email: userFound.email,
+        id: userFound.id,
+        admin: userFound.admin,
+        calification: userFound.calification,
+        access_token: token,
+      };
+      const toSend = {
+        ...PreUser,
+        access_token: token,
+        token_type: 'bearer',
+      }
+      res.status(200).json(toSend);
     } else {
       res
         .json({ error: error.message });
