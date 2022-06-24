@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+
+
+
 // import './MessageInput.css';
 
-const NewMessage = ({socket}) => {
+const NewMessage = ({ socket }) => {
+  const { currentUser } = useAuth();
   const [value, setValue] = useState('');
   const submitForm = (e) => {
     e.preventDefault();
-    socket.emit('message', value);
+    socket.emit('message', `${currentUser.username} ${value}`);
     setValue('');
   };
 

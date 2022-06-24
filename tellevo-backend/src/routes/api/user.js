@@ -74,7 +74,6 @@ router.post("/login/", async (req, res) => {
   } else {
     const result = true;
     if (result) {
-      // console.log("previo al login", userFound);
       const token = await generateToken(userFound);
       const PreUser = {
         username: userFound.username,

@@ -31,7 +31,7 @@ function Rutas() {
       <Route path="/trips" element={<TripsView />} />
 
       <Route exact path="/createtrip" element={<CreateTrip />} />
-      <Route exact path="/chat" element={<Chat />} />
+      <Route exact path="/trip/:id/chat" element={<Chat />} />
 
     </Routes>
   );

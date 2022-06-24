@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams, useNavigate, renderMatches } from 'react-router-dom';
-import { DeleteButton, EditButton, SessionButton, BackgroundProfile, UserInfo,
-Username, Name, Email, Driver, ActionButtons } from './styled/Profile.styled';
+import {
+  DeleteButton, EditButton, SessionButton, BackgroundProfile, UserInfo,
+  Username, Name, Email, Driver, ActionButtons
+} from './styled/Profile.styled';
 // import { userContext, toggleUserContext } from '../../providers/UserProvider';
 import useAuth from '../../hooks/useAuth';
 
@@ -15,9 +17,8 @@ const Profile = () => {
   console.log("UUUUSSSUARIO", currentUser);
   const deleteUser = async () => {
     axios.delete(`/user/${currentUser.id}`).then((response) => {
-      console.log("RESPONSE: ",response);
-      if(response.status)
-      {
+      console.log("RESPONSE: ", response);
+      if (response.status) {
         // userLogin(null);
         // handleUserLogin(null);
         handleUserLogout();
@@ -47,12 +48,11 @@ const Profile = () => {
         <Username>{currentUser.username}</Username>
         {/* <Name>{currentUser.name}</Name> */}
         <Email>{currentUser.email}</Email>
-        {currentUser.driver ? <Driver>Registered as driver</Driver> : 
-        <Driver>Not registered as driver</Driver>}
+        {currentUser.driver ? <Driver>Registered as driver</Driver> :
+          <Driver>Not registered as driver</Driver>}
       </UserInfo>
       <ActionButtons>
         <EditButton onClick={editUser}>Editar Perfil</EditButton>
-        <SessionButton onClick={handleUserLogout}>Cerrar Sesión</SessionButton>
       </ActionButtons>
       <div>
         <DeleteButton onClick={deleteUser}>Eliminar Cuenta</DeleteButton>

@@ -3,11 +3,11 @@ const messages = new Set();
 const users = new Map();
 
 const defaultUser = {
-  id: 'anon',
-  name: 'Anonymous',
+  id: '',
+  name: '',
 };
 
-const messageExpirationTimeMS = 5*60 * 1000;
+const messageExpirationTimeMS = 5 * 60 * 1000;
 
 class Connection {
   constructor(io, socket) {
